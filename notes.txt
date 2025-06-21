@@ -1,0 +1,17 @@
+GameManager:
+- lastQuestionId - should this be private? This should not be public, maybe this should be returned by some function?
+
+States:
+- Should states methods be public or not?
+- Changes to the original UML plan - introducing a BaseState class (the same file as IState), this ensures that the code is not rewritten,
+again and again by implementing base methods as virtual, which can be the overriden in the inhertied classes. Now - the base inherits from
+interface and all subsequent states inherit from baseState. This ensures no implementation in interface and makes it work in C# 8.0 and further.
+- Chnaged type of IState class to abstract,
+- Add text fetching from files
+- Is while(true) approach correct in handling try catch with user input (STARTSTATE)??
+- Added StartDebugState - this provides an overriden GatherInput() which fives fixed mock data, without need for user input,
+
+
+
+ACTION PLAN:
+- Program states to a working and switching level, built on top of that.
