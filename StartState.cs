@@ -3,6 +3,9 @@ namespace finalSzczygielski
 {
     public class StartState:IState
     {
+        private uint levels;
+        private uint mapSize;
+
         public StartState()
         {
         }
@@ -55,9 +58,14 @@ namespace finalSzczygielski
 
         public override void PerformAction()
         {
+            //PerfomAction() contains sequential logic according to the
+            //state diagram and UML
             try
             {
                 base.PerformAction();
+                CreateGameCore();
+                //resetAvailableFlags();
+                //resetDeleteCounter();
                 this.context.ChangeState(new InGameState());
             }
 
@@ -69,7 +77,18 @@ namespace finalSzczygielski
 
         public void CreateGameCore()
         {
+            this.context.CreateGameCore(levels, mapSize);
+        }
 
+        public void resetAvailableFlags()
+        {
+            throw new NotImplementedException("ResetAllFlags method not implemented yet");
+        }
+
+        public void resetDeleteCounter()
+        {
+            //Last score entry in SQL?
+            throw new NotImplementedException("resetDeleteCounter method not implemented yet");
         }
     }
 }

@@ -62,7 +62,7 @@ namespace finalSzczygielski
 
         public uint deletedAnsCounter { get; private set; }
         public uint lastQuestionId { get; protected set; } // FIX
-        //GameCore gameCore;
+        private GameCore gameCore = null; //initialized in CreateGameCore
         //SqlManager sqlManager;
         //WindowManager windowManager;
         //Printer printer;
@@ -95,6 +95,31 @@ namespace finalSzczygielski
             levels = 1; //levels have to be non 0
             deletedAnsCounter = 0;
             lastQuestionId = 0;
+        }
+
+        public void CreateGameCore(uint numberOfShips, uint mapSize)
+        {
+            //This method creates GameCore, works with StartState implementation
+            try
+            {
+                if (_state is StartState or StartDebugState)
+                {
+                    gameCore = new GameCore(numberOfShips, mapSize);
+                }
+                else
+                {
+                    throw new InvalidOperationException($"CreateGameCore allowed only in StartState, current state: {_state.GetType()}");
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"Invalid Operation exception: {ex.Message}");
+            }
+
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Error: {ex}");
+            }
         }
 
         public void startEngine()

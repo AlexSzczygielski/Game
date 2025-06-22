@@ -1,0 +1,5 @@
+1. First task, initial version of documentation - 1h 15 min
+2. Second task, UML and State Diagrams - 9h
+3. Coding, first approach(final project second task, coding)  - 8h
+4. Back to the drawing board - fix UML, add factory - ?
+5. Back to the coding - 
