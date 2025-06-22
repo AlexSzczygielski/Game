@@ -5,7 +5,14 @@ namespace finalSzczygielski
     {
         public EndState()
         {
-            throw new NotImplementedException("EndState not implemented yet");
+            Console.WriteLine("EndState not finished yet");
+        }
+
+        public override void PrintText()
+        {
+            base.PrintText();
+            Console.WriteLine("Quitting the program");
+            this.context.StopEngine();
         }
     }
 }

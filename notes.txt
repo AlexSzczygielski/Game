@@ -1,3 +1,6 @@
+GameEngine:
+- Added running flad and stop engine method,
+
 GameManager:
 - lastQuestionId - should this be private? This should not be public, maybe this should be returned by some function?
 - added CreateGameCore to the GameManager, which is called with input data by StartState method CreateGameCore()
@@ -22,8 +25,13 @@ in InGameState.
 
 InputManager:
 - decide wether not to delete ArrowListener() due to its' simpple logic?
+- Change UML to static,
 
 ACTION PLAN:
 - Program states to a working and switching level, build further on top of that.
 - Create Factory for ships? Remind yourself how this works. Modify UML, that would be the best approach. Leftover at GameCore creation of IShips
 a factory could be used here to determine what type of ship to create.
+
+ToDo list:
+- update map's distribution of objects,
+- link map size to number of levels, determine minimum mapsize,

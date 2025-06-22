@@ -60,6 +60,7 @@ namespace finalSzczygielski
             }
         }
 
+        private bool _running;
         public uint deletedAnsCounter { get; private set; }
         public uint lastQuestionId { get; protected set; } // FIX
         public GameCore gameCore { get; private set; } //initialized in CreateGameCore
@@ -93,6 +94,7 @@ namespace finalSzczygielski
         public void ResetCounters()
         {
             levels = 1; //levels have to be non 0
+            _running = false; //Game not started yet
             deletedAnsCounter = 0;
             lastQuestionId = 0;
         }
@@ -125,10 +127,16 @@ namespace finalSzczygielski
         public void startEngine()
         {
             //Starts the game
-            while (true)
+            _running = true;
+            while (_running)
             {
                 this._state.PerformAction();
             }
+        }
+
+        public void StopEngine()
+        {
+            _running = false;
         }
 
         public void Test()

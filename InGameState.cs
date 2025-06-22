@@ -22,6 +22,11 @@ namespace finalSzczygielski
             {
                 ship.Movement(key);
             }
+
+            if(key == ConsoleKey.Q)
+            {
+                this.context.ChangeState(new EndState());
+            }
         }
 
         public bool CheckCollisions()
@@ -43,7 +48,7 @@ namespace finalSzczygielski
 
         public ConsoleKey GatherInputData()
         {
-            return InputManager.ArrowListener();
+            return InputManager.KeyListener();
         }
     }
 }

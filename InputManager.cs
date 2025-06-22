@@ -26,7 +26,7 @@ namespace finalSzczygielski
             Console.ReadKey(true); // true = don't show the key pressed
         }
 
-        public static ConsoleKey ArrowListener()
+        public static ConsoleKey KeyListener()
         {
             var keyInfo = Console.ReadKey(true); // 'true' prevents key from being shown in console
 
