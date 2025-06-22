@@ -25,9 +25,21 @@ namespace finalSzczygielski
             //All ships are created at 0,0
             //Their position is later changed in Map 
             List<IShip> temp = new List<IShip>();
-            for(int i = 0; i < _numberOfShips; i++)
+            IShipCreator creator;
+
+            //Create Useer
+            creator = new UserShipCreator();
+            temp.Add(creator.CreateShip(0, 0));
+
+            //Create enemy bots
+            creator = new EnemyShipCreator();
+            for (int i = 0; i < _numberOfShips; i++)
             {
-                temp.Add(new IShip(0, 0));
+                //This loop can be customized to create various types
+                //of enemies, depending e.g. on the counter value
+                //this ensures randomization of game in each turn
+
+                temp.Add(creator.CreateShip(0, 0));
             }
 
             return temp;
@@ -40,7 +52,8 @@ namespace finalSzczygielski
 
         protected void CreateMap()
         {
-            _map = new Map(CreateIShips(), CreatePorts(), _mapWidth, _mapHeight);
+            CreateIShips();
+            //_map = new Map(CreateIShips(), CreatePorts(), _mapWidth, _mapHeight);
         }
     }
 }

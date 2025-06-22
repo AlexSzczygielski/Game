@@ -1,7 +1,7 @@
 ﻿using System;
 namespace finalSzczygielski
 {
-    public class IShip
+    public abstract class IShip
     {
         protected uint positionX;
         protected uint positionY;

@@ -3,8 +3,8 @@ namespace finalSzczygielski
 {
     public class StartState:IState
     {
-        private uint levels;
-        private uint mapSize;
+        protected uint levels;
+        protected uint mapSize;
 
         public StartState()
         {
@@ -35,10 +35,10 @@ namespace finalSzczygielski
                 try
                 {
                     Console.WriteLine("Provide levels ");
-                    uint levels = InputManager.Parse(Console.ReadLine());
+                    levels = InputManager.Parse(Console.ReadLine());
                     this.context.levels = levels; //number of ships
                     Console.WriteLine("Provide mapSize");
-                    uint mapSize = InputManager.Parse(Console.ReadLine());
+                    mapSize = InputManager.Parse(Console.ReadLine());
                     this.context.mapSize = mapSize;
                     break;
                 }
