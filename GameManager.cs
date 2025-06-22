@@ -62,7 +62,7 @@ namespace finalSzczygielski
 
         public uint deletedAnsCounter { get; private set; }
         public uint lastQuestionId { get; protected set; } // FIX
-        private GameCore gameCore = null; //initialized in CreateGameCore
+        public GameCore gameCore { get; private set; } //initialized in CreateGameCore
         //SqlManager sqlManager;
         //WindowManager windowManager;
         //Printer printer;
@@ -125,7 +125,10 @@ namespace finalSzczygielski
         public void startEngine()
         {
             //Starts the game
-            this._state.PerformAction();
+            while (true)
+            {
+                this._state.PerformAction();
+            }
         }
 
         public void Test()

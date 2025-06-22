@@ -63,9 +63,11 @@ namespace finalSzczygielski
             try
             {
                 base.PerformAction();
+                this.GatherInputData();
                 CreateGameCore();
                 //resetAvailableFlags();
                 //resetDeleteCounter();
+                InputManager.WaitForInput();
                 this.context.ChangeState(new InGameState());
             }
 

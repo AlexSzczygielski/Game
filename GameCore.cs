@@ -6,7 +6,7 @@ namespace finalSzczygielski
         //This class is responsible for creation of objects used
         //in program
 
-        private Map _map;
+        public Map _map { get; private set; }
         //protected IWeather weather;
         private uint _numberOfShips; //this is also number of level/rounds
         private uint _mapWidth;
@@ -47,13 +47,19 @@ namespace finalSzczygielski
 
         protected List<Port> CreatePorts()
         {
-            throw new NotImplementedException("CreatePorts() method not implemented yet");
+            //Number of ports should be linked to the map size
+            //Default position is 0,0, it is later distributed
+            //in Map class
+            List<Port> temp = new List<Port>();
+
+            temp.Add(new Port(0, 0));
+
+            return temp;
         }
 
         protected void CreateMap()
         {
-            CreateIShips();
-            //_map = new Map(CreateIShips(), CreatePorts(), _mapWidth, _mapHeight);
+            _map = new Map(CreateIShips(), CreatePorts(), _mapWidth, _mapHeight);
         }
     }
 }

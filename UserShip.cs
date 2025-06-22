@@ -7,6 +7,18 @@ namespace finalSzczygielski
         {
             Console.WriteLine("UserShip implementation not ready");
         }
+
+        public void Movement(ConsoleKey key)
+        {
+            if(key == ConsoleKey.LeftArrow)
+            {
+                direction--;
+            }
+            else if(key == ConsoleKey.RightArrow)
+            {
+                direction++;
+            }
+        }
     }
 }
 

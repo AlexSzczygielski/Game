@@ -8,17 +8,22 @@ namespace finalSzczygielski
         //Map is responsible for managing
         //position of objects   
         //Map's constructor should take 
-        //width and height as an input.
+        //width and height,
+        //Listso of ships and ports as an input.
 
         protected uint mapWidth;
         protected uint mapHeight;
         //protected uint collisionRadius;
-        protected List<IShip> ships;
-        protected List<Port> ports;
+        public List<IShip> ships { get; protected set; }
+        public List<Port> ports { get; protected set; }
 
-        public Map(List<IShip> ships, List<Port> ports, uint width, uint height)
+        public IEnumerable<UserShip> UserShips => ships.OfType<UserShip>(); // => means readonly
+        public IEnumerable<EnemyShip> EnemyShips => ships.OfType<EnemyShip>();
+
+        public Map(List<IShip> shipsIn, List<Port> portsIn, uint width, uint height)
         {
-            throw new NotImplementedException("Map not implemented yet");
+            ships = shipsIn;
+            ports = portsIn;
             //DistributeObjects();
         }
 

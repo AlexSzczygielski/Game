@@ -5,7 +5,28 @@ namespace finalSzczygielski
     {
         protected uint positionX;
         protected uint positionY;
-        protected uint direction;
+        private int _direction;
+        public int direction
+        {
+            get { return _direction; }
+            set
+            {
+                Console.WriteLine("setting direction");
+                if(value>359)
+                {
+                    _direction = 0;
+                }
+                else if (value < 0)
+                {
+                    _direction = 359;
+                }
+                else
+                {
+                    _direction = value;
+                }
+                
+            }
+        }
         protected int speed;
         protected uint collisionRadius; //in inherited classes this should be custom
                                         //this value is treated as default
@@ -13,7 +34,7 @@ namespace finalSzczygielski
         public IShip(uint posX, uint posY)
         {
             //null at the creation time, set later in movement
-            direction = 0;
+            _direction = 0;
             speed = 0;
             collisionRadius = 5;
 
@@ -30,7 +51,7 @@ namespace finalSzczygielski
             positionY = y;
         }
 
-        protected void Movement()
+        public virtual void Movement()
         {
             //Movement during the game, artificial or by user input
             throw new NotImplementedException("Movement() not implemented");

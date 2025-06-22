@@ -29,7 +29,7 @@ namespace finalSzczygielski
 
         public virtual void PrintText()
         {
-            Console.Clear();
+            //Console.Clear();
         }
         public virtual void GatherInputData()
         {
@@ -40,7 +40,6 @@ namespace finalSzczygielski
         {
             RenderWindow();
             PrintText();
-            GatherInputData();
         }
     }
 }

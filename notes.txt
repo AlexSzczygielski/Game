@@ -1,5 +1,6 @@
 GameManager:
 - lastQuestionId - should this be private? This should not be public, maybe this should be returned by some function?
+- added CreateGameCore to the GameManager, which is called with input data by StartState method CreateGameCore()
 
 States:
 - Should states methods be public or not?
@@ -10,8 +11,19 @@ interface and all subsequent states inherit from baseState. This ensures no impl
 - Add text fetching from files
 - Is while(true) approach correct in handling try catch with user input (STARTSTATE)??
 - Added StartDebugState - this provides an overriden GatherInput() which fives fixed mock data, without need for user input,
+- Added methods from state diagram to StartState (in comparison with UML)
 
+GameCore:
+- Added methods for: Creating Ships, Creating Ports, Creating map with all instances, factory pattern.
 
+Map:
+- created IEnumerable to serve as a query filter for further usage of specific type, allows others classes to use that, e.g showing direction
+in InGameState.
+
+InputManager:
+- decide wether not to delete ArrowListener() due to its' simpple logic?
 
 ACTION PLAN:
-- Program states to a working and switching level, built on top of that.
+- Program states to a working and switching level, build further on top of that.
+- Create Factory for ships? Remind yourself how this works. Modify UML, that would be the best approach. Leftover at GameCore creation of IShips
+a factory could be used here to determine what type of ship to create.

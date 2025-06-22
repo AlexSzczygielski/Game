@@ -13,6 +13,15 @@ namespace finalSzczygielski
             //Add logic that checks if the port does not collide with anything
         }
 
+        public void Move(uint x, uint y)
+        {
+            //A kind of setter that can place an object in a specific place
+            //Used especially by Map class
+            //Where to check map boundaries?
+            positionX = x;
+            positionY = y;
+        }
+
         public void SaveGame()
         {
             throw new NotImplementedException("SaveGame() not implemented");

@@ -19,6 +19,28 @@ namespace finalSzczygielski
                 throw new FormatException("Failed to parse input as unsigned integer.");
             }
         }
+
+        public static void WaitForInput()
+        {
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true); // true = don't show the key pressed
+        }
+
+        public static ConsoleKey ArrowListener()
+        {
+            var keyInfo = Console.ReadKey(true); // 'true' prevents key from being shown in console
+
+            if (keyInfo.Key == ConsoleKey.LeftArrow)
+            {
+                return ConsoleKey.LeftArrow;
+            }
+            else if (keyInfo.Key == ConsoleKey.RightArrow)
+            {
+                return ConsoleKey.RightArrow;
+            }
+
+            return keyInfo.Key; // return whatever key was pressed
+        }
     }
 }
 

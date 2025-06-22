@@ -5,7 +5,7 @@ namespace finalSzczygielski
     {
         public EnemyShip(uint posX, uint posY):base(posX,posY)
         {
-            Console.WriteLine("UserShip implementation not ready");
+            Console.WriteLine("EnemyShip implementation not ready");
         }
     }
 }
