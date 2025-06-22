@@ -2,4 +2,6 @@
 2. Second task, UML and State Diagrams - 9h
 3. Coding, first approach(final project second task, coding)  - 8h
 4. Back to the drawing board - fix UML, add factory - 1h
-5. Back to the coding - 
+5. Back to the coding - 13 h - 8h = 5h
+6. Fixing UML hierarchy again - Adding MapPlacableObject - 0.5h
+7. Back to the coding - 

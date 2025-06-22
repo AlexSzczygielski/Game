@@ -3,11 +3,10 @@ namespace finalSzczygielski
 {
     public class UserShip:IShip
     {
-        protected ConsoleKey lastPressedKey;
         public UserShip(int posX, int posY) :base(posX,posY)
         {
             Console.WriteLine("UserShip implementation not ready");
-            lastPressedKey = ConsoleKey.NoName; //To compare with Movement on the first input
+            SetMaxSpeed(5);
         }
 
         public void Movement(ConsoleKey key)
@@ -22,7 +21,7 @@ namespace finalSzczygielski
             }
             else if (key == ConsoleKey.UpArrow)
             {
-                //Do nothing
+                //Do nothing, stop change
             }
             else if(key == ConsoleKey.W)
             {
