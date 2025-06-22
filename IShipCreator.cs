@@ -3,7 +3,7 @@ namespace finalSzczygielski
 {
     public interface IShipCreator
     {
-        public IShip CreateShip(uint x, uint y);
+        public IShip CreateShip(int x, int y);
     }
 }
 

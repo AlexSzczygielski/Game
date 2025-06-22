@@ -7,6 +7,11 @@ namespace finalSzczygielski
         //It is used through a few classes, a bit like library, so it is defined
         //as static.
 
+        private static Thread _inputThread;
+        private static bool _listening;
+        private static ConsoleKey? _lastKey = null;
+        private static readonly object _lock = new();
+
         public static uint Parse(string s)
         {
             if (uint.TryParse(s, out uint number))
@@ -40,6 +45,63 @@ namespace finalSzczygielski
             }
 
             return keyInfo.Key; // return whatever key was pressed
+        }
+
+
+        // Start the background input listener thread
+        public static void StartListening()
+        {
+            if (_listening)
+                return; // already running
+
+            _listening = true;
+            _inputThread = new Thread(() =>
+            {
+                while (_listening)
+                {
+                    if (Console.KeyAvailable)
+                    {
+                        var keyInfo = Console.ReadKey(true);
+                        lock (_lock)
+                        {
+                            _lastKey = keyInfo.Key;
+                        }
+                    }
+                    else
+                    {
+                        Thread.Sleep(10); // small delay to reduce CPU usage
+                    }
+                }
+            });
+
+            _inputThread.IsBackground = true;
+            _inputThread.Start();
+        }
+
+        // Stop the input listener thread (optional)
+        public static void StopListening()
+        {
+            _listening = false;
+            _inputThread?.Join();
+        }
+
+        // Try to get the last pressed key and reset it (non-blocking)
+        public static bool TryGetLastKey(out ConsoleKey key)
+        {
+            lock (_lock)
+            {
+                if (_lastKey.HasValue)
+                {
+                    key = _lastKey.Value;
+                    _lastKey = null;
+                    return true;
+                }
+                else
+                {
+                    key = default;
+                    return false;
+                }
+            }
         }
     }
 }

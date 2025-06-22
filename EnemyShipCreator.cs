@@ -7,7 +7,7 @@ namespace finalSzczygielski
         {
         }
 
-        public IShip CreateShip(uint x, uint y)
+        public IShip CreateShip(int x, int y)
         {
             return new EnemyShip(x, y);
         }

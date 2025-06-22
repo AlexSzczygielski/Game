@@ -3,17 +3,17 @@ namespace finalSzczygielski
 {
     public class Port
     {
-        protected uint positionX;
-        protected uint positionY;
+        protected int positionX;
+        protected int positionY;
 
-        public Port(uint posX, uint posY)
+        public Port(int posX, int posY)
         {
             positionX = posX;
             positionY = posY;
             //Add logic that checks if the port does not collide with anything
         }
 
-        public void Move(uint x, uint y)
+        public void Move(int x, int y)
         {
             //A kind of setter that can place an object in a specific place
             //Used especially by Map class

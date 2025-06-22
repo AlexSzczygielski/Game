@@ -39,6 +39,14 @@ namespace finalSzczygielski
             //contains check so that two object are not placed in the same spot
             throw new NotImplementedException("DistributeObjects() not implemented");
         }
+
+        public void UpdateMapPositions()
+        {
+            foreach(IShip ship in ships)
+            {
+                ship.Movement();
+            }
+        }
     }
 }
 

@@ -3,7 +3,7 @@ namespace finalSzczygielski
 {
     public class EnemyShip:IShip
     {
-        public EnemyShip(uint posX, uint posY):base(posX,posY)
+        public EnemyShip(int posX, int posY):base(posX,posY)
         {
             Console.WriteLine("EnemyShip implementation not ready");
         }

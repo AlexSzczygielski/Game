@@ -3,8 +3,8 @@ namespace finalSzczygielski
 {
     public abstract class IShip
     {
-        protected uint positionX;
-        protected uint positionY;
+        protected int positionX;
+        protected int positionY;
         private int _direction;
         public int direction
         {
@@ -27,22 +27,42 @@ namespace finalSzczygielski
                 
             }
         }
-        protected int speed;
+
+        private int _maxspeed;
+
+        private int _speed;
+        public int speed
+        {
+            get { return _speed; }
+            set
+            {
+                if(value<=_maxspeed && value >= -_maxspeed)
+                {
+                    _speed = value;
+                }
+            }
+        }
         protected uint collisionRadius; //in inherited classes this should be custom
                                         //this value is treated as default
 
-        public IShip(uint posX, uint posY)
+        public IShip(int posX, int posY)
         {
             //null at the creation time, set later in movement
             _direction = 0;
-            speed = 0;
+            _maxspeed = 2; //Default max speed for IShip object
+            speed = _maxspeed;
             collisionRadius = 5;
 
             positionX = posX;
             positionY = posY;
         }
 
-        public void Move(uint x, uint y)
+        public void SetMaxSpeed(int value)
+        {
+            _maxspeed = value;
+        }
+
+        public void Move(int x, int y)
         {
             //A kind of setter that can place an object in a specific place
             //Used especially by Map class
@@ -54,7 +74,28 @@ namespace finalSzczygielski
         public virtual void Movement()
         {
             //Movement during the game, artificial or by user input
-            throw new NotImplementedException("Movement() not implemented");
+            (positionX,positionY) = GetVectorEnd(positionX,positionY,speed,direction);
+            //throw new NotImplementedException("Movement() not implemented");
+        }
+
+        public virtual (int x1,int y1) GetVectorEnd(int x0, int y0, int length, int direction)
+        {
+            //Get the end of the direction vector - actual movement
+            //Convert maritime direction to mathematical angle
+            //Console.WriteLine($"x {x0}, y {y0}, length {length}, direction {direction}");
+            double angleRad = (90 - direction) * Math.PI / 180.0;
+
+            //Calculate deltas
+            double dx = length * Math.Cos(angleRad);
+            double dy = length * Math.Sin(angleRad);
+
+            //Compute end point
+            int x1 = x0 + (int)Math.Round(dx);
+            int y1 = y0 - (int)Math.Round(dy); // y decreases as you go "up" in most screen coords
+
+            Console.WriteLine($"Vector end: ({x1}, {y1})");
+            return (x1, y1);
+
         }
 
     }

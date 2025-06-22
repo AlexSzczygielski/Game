@@ -3,30 +3,43 @@ namespace finalSzczygielski
 {
     public class InGameState:IState
     {
+        private ConsoleKey key;
         public InGameState()
         {
         }
 
+        //~InGameState()
+        //{
+        //    InputManager.StopListening();
+        //    Console.WriteLine("Destructor: InGameState destroyed");
+        //}
+
         public override void PerformAction()
         {
-            ConsoleKey key;
+            InputManager.StartListening(); //Constant key listen for PerfomAction()
+            GatherInputData();
             base.PerformAction();
-            key = this.GatherInputData();
-            Update(key);
+            Update();
             //CheckCollisions();
+            InputManager.StopListening();  
         }
 
-        public void Update(ConsoleKey key)
+        public void Update()
         {
+            //Exit condition
+            if (key == ConsoleKey.Q)
+            {
+                this.context.ChangeState(new EndState());
+            }
+
+            //Update user input direction
             foreach (var ship in this.context.gameCore._map.UserShips)
             {
                 ship.Movement(key);
             }
 
-            if(key == ConsoleKey.Q)
-            {
-                this.context.ChangeState(new EndState());
-            }
+            //Update position
+            this.context.gameCore._map.UpdateMapPositions();
         }
 
         public bool CheckCollisions()
@@ -42,13 +55,16 @@ namespace finalSzczygielski
                 "provide steering input");
             foreach (var ship in this.context.gameCore._map.UserShips)
             {
-                Console.WriteLine($"Course: {ship.direction}");
+                Console.WriteLine($"User Course: {ship.direction}, Speed: {ship.speed}");
             }
         }
 
-        public ConsoleKey GatherInputData()
+        public void GatherInputData()
         {
-            return InputManager.KeyListener();
+            if (InputManager.TryGetLastKey(out ConsoleKey pressedKey))
+            {
+                key = pressedKey;
+            }
         }
     }
 }
