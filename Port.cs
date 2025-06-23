@@ -7,7 +7,6 @@ namespace finalSzczygielski
         {
             _positionX = posX;
             _positionY = posY;
-            //Add logic that checks if the port does not collide with anything
         }
 
         public void SaveGame()
@@ -18,6 +17,11 @@ namespace finalSzczygielski
         public void GetHint()
         {
             throw new NotImplementedException("GetHint() not implemented");
+        }
+
+        public override string ToString()
+        {
+            return "Port";
         }
     }
 }

@@ -42,6 +42,7 @@ namespace finalSzczygielski
             int halfWidth = (int)mapWidth / 2;
             int halfHeight = (int)mapHeight / 2;
 
+            //Fill mapGrid with cells
             for (int x = -halfWidth; x < halfWidth; x++)
             {
                 for (int y = -halfHeight; y < halfHeight; y++)
@@ -85,20 +86,23 @@ namespace finalSzczygielski
 
             }
 
-            mapEntities.First().SetPosition(0, 400);
+            //mapEntities.First().SetPosition(400, 350);
+            mapEntities[1].SetPosition(400, 400);
+            ((IShip)mapEntities[1]).speed = -2;
+            mapEntities[2].SetPosition(400, 300);
 
         }
 
-        public void CreateMap()
+        public void RefreshMap()
         {
             //Sequential logic of map handling in each round
             //This should be called in each round
             ResetMap();
             CreateBoundaries();
-            //PrintMap();
             UpdateMapPositions();
             UpdateMapArray();
             CheckCollisions();
+            //PrintMap();
 
         }
 
@@ -169,32 +173,90 @@ namespace finalSzczygielski
 
         public void CheckCollisions()
         {
-            foreach(MapCell cell in mapGrid.Values)
+            HashSet<(int, int)> reportedCollisions = new HashSet<(int, int)>(); //Does not allow duplicates
+
+            foreach (var pair in mapGrid)
             {
-                //Console.WriteLine($"Collision detected: ID:{cell.ownerId} and ID:{cell.lastOwnerId}");
+                var cell = pair.Value; //Pair - MapCell
+                if ((cell.ownerId != cell.lastOwnerId) && (cell.lastOwnerId != -1))
+                {
+                    int id1 = cell.ownerId;
+                    int id2 = cell.lastOwnerId;
+
+                    // Ensure each pair is reported only once
+                    var orderedPair = id1 < id2 ? (id1, id2) : (id2, id1);
+                    if (reportedCollisions.Contains(orderedPair))
+                        continue;   //If found, skip this iteration
+
+                    reportedCollisions.Add(orderedPair);
+                    
+
+                    //Search for entity with this ID
+                    MapEntity entity1 = null;
+                    foreach (var e in mapEntities)
+                    {
+                        if (e.id == id1)
+                        {
+                            entity1 = e;
+                            break;
+                        }
+                    }
+
+                    MapEntity entity2 = null;
+                    foreach (var e in mapEntities)
+                    {
+                        if (e.id == id2)
+                        {
+                            entity2 = e;
+                            break;
+                        }
+                    }
+
+                    //Move Crashing EnemyShip entities
+                    if (entity1 is EnemyShip && (entity2 is EnemyShip || entity2 is Port))
+                    {
+                        //Console.WriteLine($"Enemy ship, ID: {id1} must avoid collision next round.");
+                        ForceRandomMove(entity1);
+                    }
+
+                    if (entity2 is EnemyShip && (entity1 is EnemyShip || entity1 is Port))
+                    {
+                        //Console.WriteLine($"Enemy ship, ID: {id2} must avoid collision next round.");
+                        ForceRandomMove(entity2);
+                    }
+
+                }
+            }
+        }
+
+        public void ForceRandomMove(MapEntity entity)
+        {
+            //Forces random move for bots, used to revert collisions
+            Random rand = new Random();
+            int offsetX = rand.Next(-50, 51);
+            int offsetY = rand.Next(-50, 51);
+
+            int newX = entity.positionX + offsetX;
+            int newY = entity.positionY + offsetY;
+            if (IsInMapBoundaries(newX, newY))
+            {
+                TryMoveSingleObject(entity, newX,newY);
             }
         }
 
         public void PrintMap()
         {
-            int halfWidth = (int)mapWidth / 2;
-            int halfHeight = (int)mapHeight / 2;
-
-            for (int y = halfHeight - 1; y >= -halfHeight; y--)
+            foreach(var kvp in mapGrid)
             {
-                for (int x = -halfWidth; x < halfWidth; x++)
+                var cell = kvp.Value;
+                (int posX, int posY) = kvp.Key;
+                if(cell.occupiedFlag == true)
                 {
-                    if (mapGrid.TryGetValue((x, y), out var cell))
-                    {
-                        Console.Write(cell.ownerId == -1 ? "." : cell.ownerId.ToString());
-                    }
-                    else
-                    {
-                        Console.Write(" ");
-                    }
+                    
+                    if(cell.ownerId == 1) Console.Write($"ID: {cell.ownerId}, cell_pos ({posX},{posY}) \n");
                 }
-                Console.WriteLine();
             }
+            //throw new Exception();
         }
     }
 }

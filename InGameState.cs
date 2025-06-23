@@ -5,22 +5,15 @@ namespace finalSzczygielski
 {
     public class InGameState:IState
     {
-        private StringBuilder sb = new StringBuilder();
+        private StringBuilder sb = new StringBuilder(); //Smooth GUI
         private ConsoleKey key;
         public InGameState()
         {
         }
 
-        //~InGameState()
-        //{
-        //    InputManager.StopListening();
-        //    Console.WriteLine("Destructor: InGameState destroyed");
-        //}
-
         public override void PerformAction()
         {
             InputManager.StartListening(); //Constant key listen for PerfomAction()
-            GatherInputData();
             base.PerformAction();
             Update();
             InputManager.StopListening();  
@@ -41,7 +34,7 @@ namespace finalSzczygielski
             }
 
             //Update position
-            this.context.gameCore._map.CreateMap();
+            this.context.gameCore._map.RefreshMap();
         }
 
         public bool CheckCollisions()
@@ -70,7 +63,7 @@ namespace finalSzczygielski
 
         }
 
-        public void GatherInputData()
+        public override void GatherInputData()
         {
             if (InputManager.TryGetLastKey(out ConsoleKey pressedKey))
             {

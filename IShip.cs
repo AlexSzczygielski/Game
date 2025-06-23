@@ -47,7 +47,7 @@ namespace finalSzczygielski
             _direction = 0;
             _maxspeed = 2; //Default max speed for IShip object
             speed = _maxspeed;
-            collisionRadius = 5;
+            //collisionRadius = 20;
 
             _positionX = posX;
             _positionY = posY;
@@ -83,7 +83,7 @@ namespace finalSzczygielski
 
             //Compute end point
             int x1 = x0 + (int)Math.Round(dx);
-            int y1 = y0 - (int)Math.Round(dy); // y decreases as you go "up" in most screen coords
+            int y1 = y0 + (int)Math.Round(dy); // y decreases as you go "up" in most screen coords
 
             //Console.WriteLine($"Vector end: ({x1}, {y1})");
             return (x1, y1);

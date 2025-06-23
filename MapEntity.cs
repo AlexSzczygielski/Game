@@ -38,15 +38,17 @@ namespace finalSzczygielski
             //Left Bottom point of rectangle
             int startPointX = positionX - (int)collisionRadius;
             int startPointY = positionY - (int)collisionRadius;
+            int endPointX = positionX + (int)collisionRadius;
+            int endPointY = positionY + (int)collisionRadius;
 
             var occupied = new List<(int, int)>();
 
-            for (int i = startPointX; i < startPointX + collisionRadius; i++)
+            for (int i = startPointX; i <= endPointX; i++)
             {
-                for (int j = startPointY; j < startPointY + collisionRadius; j++)
+                for (int j = startPointY; j <= endPointY; j++)
                 {
                     occupied.Add((i, j));
-                    //mapGrid[i, j].SetOwner(id);
+                    //if(id == 1) Console.WriteLine($"ID: {id}, cells_to_occupy: ({i},{j})");
                 }
             }
 
