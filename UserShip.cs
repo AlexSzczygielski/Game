@@ -36,8 +36,13 @@ namespace finalSzczygielski
 
         public override void SetPosition(int x, int y)
         {
-            Console.Write("[USER]");
+            //Console.Write("[USER]");
             base.SetPosition(x, y);
+        }
+
+        public override string ToString()
+        {
+            return "USER Ship";
         }
     }
 }

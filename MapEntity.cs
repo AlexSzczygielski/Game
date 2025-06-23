@@ -30,7 +30,7 @@ namespace finalSzczygielski
         {
             _positionX = x;
             _positionY = y;
-            Console.WriteLine($"Ship {this.id} position: ({x},{y})");
+            //Console.WriteLine($"Ship {this.id} position: ({x},{y})");
         }
 
         public virtual List<(int x, int y)> ReturnOccupiedCoordinates()

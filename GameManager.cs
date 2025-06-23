@@ -130,6 +130,7 @@ namespace finalSzczygielski
             _running = true;
             while (_running)
             {
+                Console.SetCursorPosition(0, 0);
                 this._state.PerformAction();
                 System.Threading.Thread.Sleep(100); // sleeps for 100 milliseconds
             }

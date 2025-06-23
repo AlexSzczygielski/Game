@@ -3,6 +3,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.CursorVisible = false;
         Console.WriteLine("This is a final project from \"Designing and creating high-level object-oriented applications course\".");
         //Debugging mode selection
         bool debug = true;
@@ -11,5 +12,6 @@ class Program
 
         //Create GameEngine 
         GameManager manager = new GameManager(startState);
+        Console.CursorVisible = true;
     }
 }

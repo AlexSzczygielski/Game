@@ -18,8 +18,9 @@ namespace finalSzczygielski
 
         public void SetOwner(int newownerId)
         {
-            if (ownerId != newownerId && ownerId != -1)
+            if (ownerId != newownerId)
             {
+                //Console.WriteLine($"update owner from {ownerId} to {newownerId}");
                 lastOwnerId = ownerId;
                 occupiedFlag = true;
             }

@@ -95,6 +95,11 @@ namespace finalSzczygielski
             base.SetPosition(x, y);
         }
 
+        public override string ToString()
+        {
+            return "Ship";
+        }
+
     }
 }
 

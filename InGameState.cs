@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Text;
+
 namespace finalSzczygielski
 {
     public class InGameState:IState
     {
+        private StringBuilder sb = new StringBuilder();
         private ConsoleKey key;
         public InGameState()
         {
@@ -20,7 +23,6 @@ namespace finalSzczygielski
             GatherInputData();
             base.PerformAction();
             Update();
-            //CheckCollisions();
             InputManager.StopListening();  
         }
 
@@ -39,7 +41,7 @@ namespace finalSzczygielski
             }
 
             //Update position
-            this.context.gameCore._map.UpdateMapPositions();
+            this.context.gameCore._map.CreateMap();
         }
 
         public bool CheckCollisions()
@@ -50,14 +52,22 @@ namespace finalSzczygielski
         public override void PrintText()
         {
             base.PrintText();
-            Console.WriteLine("This will be eventually printed from file\n" +
+            sb.Append("This will be eventually printed from file\n" +
                 "This is InGameState \n" +
                 "provide steering input" +
                 $"Map Boundaries: ");
             foreach (var ship in this.context.gameCore._map.UserShips)
             {
-                Console.WriteLine($"User Course: {ship.direction}, Speed: {ship.speed}");
+                sb.Append($"\nUser Course: {ship.direction}, Speed: {ship.speed}");
             }
+
+            foreach(var entity in this.context.gameCore._map.mapEntities)
+            {
+                sb.Append($"\n[{entity}][ID: {entity.id}] position: ({entity.positionX},{entity.positionY})");
+            }
+
+            Console.WriteLine(sb);
+
         }
 
         public void GatherInputData()
