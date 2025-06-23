@@ -35,7 +35,7 @@ namespace finalSzczygielski
             //Update user input direction
             foreach (var ship in this.context.gameCore._map.UserShips)
             {
-                ship.Movement(key);
+                ship.SetSteeringParams(key);
             }
 
             //Update position
@@ -52,7 +52,8 @@ namespace finalSzczygielski
             base.PrintText();
             Console.WriteLine("This will be eventually printed from file\n" +
                 "This is InGameState \n" +
-                "provide steering input");
+                "provide steering input" +
+                $"Map Boundaries: ");
             foreach (var ship in this.context.gameCore._map.UserShips)
             {
                 Console.WriteLine($"User Course: {ship.direction}, Speed: {ship.speed}");

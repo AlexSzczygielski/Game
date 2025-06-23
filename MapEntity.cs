@@ -3,21 +3,29 @@ namespace finalSzczygielski
 {
     public abstract class MapEntity
     {
-        protected int positionX;
-        protected int positionY;
+        protected int _positionX;
+        public int positionX
+        {
+            get { return _positionX; }
+            protected set { _positionX = value; }
+        }
+        protected int _positionY;
+        public int positionY
+        {
+            get { return _positionY; }
+            protected set { _positionY = value; }
+        }
         protected uint collisionRadius; //in inherited classes this should be custom
                                         //this value is treated as default
         public MapEntity()
         {
+            collisionRadius = 20; //Default value
         }
 
-        public void Move(int x, int y)
+        public void SetPosition(int x, int y)
         {
-            //A kind of setter that can place an object in a specific place
-            //Used especially by Map class
-            //Where to check map boundaries?
-            positionX = x;
-            positionY = y;
+            _positionX = x;
+            _positionY = y;
         }
     }
 }

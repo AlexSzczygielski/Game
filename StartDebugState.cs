@@ -17,7 +17,7 @@ namespace finalSzczygielski
         public override void GatherInputData()
         {
             levels = 3;
-            mapSize = 5;
+            mapSize = 2000;
             this.context.levels = levels;
             this.context.mapSize = mapSize;
         }

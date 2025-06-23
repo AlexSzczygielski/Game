@@ -9,8 +9,9 @@ namespace finalSzczygielski
             SetMaxSpeed(5);
         }
 
-        public void Movement(ConsoleKey key)
+        public void SetSteeringParams(ConsoleKey key)
         {
+            //Set steering params, that are used by IShip Movement()
             if (key == ConsoleKey.LeftArrow)
             {
                 direction--;

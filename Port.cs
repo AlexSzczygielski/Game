@@ -5,8 +5,8 @@ namespace finalSzczygielski
     {
         public Port(int posX, int posY)
         {
-            positionX = posX;
-            positionY = posY;
+            _positionX = posX;
+            _positionY = posY;
             //Add logic that checks if the port does not collide with anything
         }
 

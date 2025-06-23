@@ -49,8 +49,8 @@ namespace finalSzczygielski
             speed = _maxspeed;
             collisionRadius = 5;
 
-            positionX = posX;
-            positionY = posY;
+            _positionX = posX;
+            _positionY = posY;
         }
 
         public void SetMaxSpeed(int value)
@@ -58,15 +58,20 @@ namespace finalSzczygielski
             _maxspeed = value;
         }
 
-        public virtual void Movement()
+        public virtual (int,int) CalculateNextMove()
         {
-            //Movement during the game, artificial or by user input
-            (positionX,positionY) = GetVectorEnd(positionX,positionY,speed,direction);
-            //throw new NotImplementedException("Movement() not implemented");
+            //Movement during the game, contains logic
+            //where to move (resultant vector) - input by artificial or user
+            //Uses MapEntinty Move() to make an actual position change
+            int newX;
+            int newY;
+            (newX,newY) = GetVectorEnd(positionX,positionY,speed,direction);
+            return (newX, newY);
         }
 
         public virtual (int x1,int y1) GetVectorEnd(int x0, int y0, int length, int direction)
         {
+            //Calculates the next move
             //Get the end of the direction vector - actual movement
             //Convert maritime direction to mathematical angle
             //Console.WriteLine($"x {x0}, y {y0}, length {length}, direction {direction}");
