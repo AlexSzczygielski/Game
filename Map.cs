@@ -87,13 +87,13 @@ namespace finalSzczygielski
             }
 
             //mapEntities.First().SetPosition(400, 350);
-            mapEntities[1].SetPosition(400, 400);
+            mapEntities[1].SetPosition(600, 300);
             ((IShip)mapEntities[1]).speed = -2;
-            mapEntities[2].SetPosition(400, 300);
+            mapEntities[2].SetPosition(600, 200);
 
         }
 
-        public void RefreshMap()
+        public IState RefreshMap(IState state)
         {
             //Sequential logic of map handling in each round
             //This should be called in each round
@@ -101,8 +101,9 @@ namespace finalSzczygielski
             CreateBoundaries();
             UpdateMapPositions();
             UpdateMapArray();
-            CheckCollisions();
+            state = CheckCollisions(state);
             //PrintMap();
+            return state;
 
         }
 
@@ -171,8 +172,11 @@ namespace finalSzczygielski
             }
         }
 
-        public void CheckCollisions()
+        public IState CheckCollisions(IState state)
         {
+            //Checks if any collisions occured
+            //state to return provided by HandleCollision
+            //Handling collisions happens in HandleCollision (if detected)
             HashSet<(int, int)> reportedCollisions = new HashSet<(int, int)>(); //Does not allow duplicates
 
             foreach (var pair in mapGrid)
@@ -212,21 +216,12 @@ namespace finalSzczygielski
                         }
                     }
 
-                    //Move Crashing EnemyShip entities
-                    if (entity1 is EnemyShip && (entity2 is EnemyShip || entity2 is Port))
-                    {
-                        //Console.WriteLine($"Enemy ship, ID: {id1} must avoid collision next round.");
-                        ForceRandomMove(entity1);
-                    }
-
-                    if (entity2 is EnemyShip && (entity1 is EnemyShip || entity1 is Port))
-                    {
-                        //Console.WriteLine($"Enemy ship, ID: {id2} must avoid collision next round.");
-                        ForceRandomMove(entity2);
-                    }
+                    //Handle crash of the MapEntity objects
+                    state = HandleCollision(entity1, entity2, state);
 
                 }
             }
+            return state;
         }
 
         public void ForceRandomMove(MapEntity entity)
@@ -244,6 +239,46 @@ namespace finalSzczygielski
             }
         }
 
+        protected IState HandleCollision(MapEntity entity1, MapEntity entity2, IState state)
+        {
+            //Collision handling, state to return is changed only when UserShip triggered the collision
+            //state change provided by HandleUserCollision
+            //Move Crashing EnemyShip entities
+            if (entity1 is EnemyShip && (entity2 is EnemyShip || entity2 is Port))
+            {
+                //Console.WriteLine($"Enemy ship, ID: {entity1.id} must avoid collision next round.");
+                ForceRandomMove(entity1);
+            }
+
+            if (entity2 is EnemyShip && (entity1 is EnemyShip || entity1 is Port))
+            {
+                //Console.WriteLine($"Enemy ship, ID: {entity2.id} must avoid collision next round.");
+                ForceRandomMove(entity2);
+            }
+
+            if(entity1 is UserShip || entity2 is UserShip)
+            {
+                state = HandleUserCollision(entity1, entity2, state);
+            }
+
+            return state;
+        }
+
+        protected IState HandleUserCollision(MapEntity e1, MapEntity e2, IState state)
+        {
+            if((e1 is UserShip && (e2 is EnemyShip)) || (e2 is UserShip && (e1 is EnemyShip)))
+            {
+                state = new QuestionAnswerState();
+            }
+
+            if ((e1 is UserShip && (e2 is Port)) || (e2 is UserShip && (e1 is Port)))
+            {
+                state = new PortState();
+            }
+
+            return state;
+        }
+
         public void PrintMap()
         {
             foreach(var kvp in mapGrid)
@@ -256,7 +291,6 @@ namespace finalSzczygielski
                     if(cell.ownerId == 1) Console.Write($"ID: {cell.ownerId}, cell_pos ({posX},{posY}) \n");
                 }
             }
-            //throw new Exception();
         }
     }
 }

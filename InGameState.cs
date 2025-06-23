@@ -34,7 +34,7 @@ namespace finalSzczygielski
             }
 
             //Update position
-            this.context.gameCore._map.RefreshMap();
+            this.context.gameCore._map.RefreshMap(this);
         }
 
         public bool CheckCollisions()

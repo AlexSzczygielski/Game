@@ -6,3 +6,4 @@
 6. Fixing UML hierarchy again - Adding MapPlacableObject - 0.5h
 7. Back to the coding - 15h - 13h = 2h
 8. Planning CollisionLogic, Map Array logic - 1h
+9. Back to the coding - ?
