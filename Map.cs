@@ -14,17 +14,23 @@ namespace finalSzczygielski
         protected uint mapWidth;
         protected uint mapHeight;
 
-        //protected uint collisionRadius;
-        public List<IShip> ships { get; protected set; }
-        public List<Port> ports { get; protected set; }
+        public List<MapEntity> mapEntities { get; protected set; }
 
-        public IEnumerable<UserShip> UserShips => ships.OfType<UserShip>(); // '=>' means readonly
-        public IEnumerable<EnemyShip> EnemyShips => ships.OfType<EnemyShip>();
+        public IEnumerable<IShip> ships => mapEntities.OfType<IShip>();
+        public IEnumerable<UserShip> UserShips => mapEntities.OfType<UserShip>(); // '=>' means readonly
+        public IEnumerable<EnemyShip> EnemyShips => mapEntities.OfType<EnemyShip>();
 
         public Map(List<IShip> shipsIn, List<Port> portsIn, uint width, uint height)
         {
-            ships = shipsIn;
-            ports = portsIn;
+            mapEntities = new List<MapEntity>();
+            foreach(IShip ship in shipsIn)
+            {
+                mapEntities.Add(ship);
+            }
+            foreach(Port port in portsIn)
+            {
+                mapEntities.Add(port);
+            }
 
             mapWidth = width;
             mapHeight = height;
@@ -33,7 +39,13 @@ namespace finalSzczygielski
 
         public bool CheckCollision()
         {
-            throw new NotImplementedException("CheckCollision() not implemented yet");
+            foreach(MapEntity var in mapEntities)
+            {
+                int upperEdgeX = var.positionX + (int)var.collisionRadius;
+                int upperEdgeY = var.positionY + (int)var.collisionRadius;
+                return true;
+            }
+            return false;
         }
 
         public bool InMapBoundaries(int x, int y)

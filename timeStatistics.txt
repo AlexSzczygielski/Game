@@ -4,4 +4,5 @@
 4. Back to the drawing board - fix UML, add factory - 1h
 5. Back to the coding - 13 h - 8h = 5h
 6. Fixing UML hierarchy again - Adding MapPlacableObject - 0.5h
-7. Back to the coding - 
+7. Back to the coding - 15h - 13h = 2h
+8. Planning CollisionLogic, Map Array logic - 1h

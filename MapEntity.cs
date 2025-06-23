@@ -15,7 +15,7 @@ namespace finalSzczygielski
             get { return _positionY; }
             protected set { _positionY = value; }
         }
-        protected uint collisionRadius; //in inherited classes this should be custom
+        public uint collisionRadius { get; protected set; }//in inherited classes this should be custom
                                         //this value is treated as default
         public MapEntity()
         {
