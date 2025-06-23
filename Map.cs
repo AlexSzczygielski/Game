@@ -20,6 +20,8 @@ namespace finalSzczygielski
         public IEnumerable<UserShip> UserShips => mapEntities.OfType<UserShip>(); // '=>' means readonly
         public IEnumerable<EnemyShip> EnemyShips => mapEntities.OfType<EnemyShip>();
 
+        protected MapCell [,] mapGrid; //mapGrid array
+
         public Map(List<IShip> shipsIn, List<Port> portsIn, uint width, uint height)
         {
             mapEntities = new List<MapEntity>();
@@ -34,10 +36,12 @@ namespace finalSzczygielski
 
             mapWidth = width;
             mapHeight = height;
+
+            mapGrid = new MapCell[mapWidth, mapHeight];
             //DistributeObjects();
         }
 
-        public bool CheckCollision()
+        public bool CheckCollisions()
         {
             foreach(MapEntity var in mapEntities)
             {
@@ -48,7 +52,7 @@ namespace finalSzczygielski
             return false;
         }
 
-        public bool InMapBoundaries(int x, int y)
+        public bool IsInMapBoundaries(int x, int y)
         {
             //Checks if an object is still within a map's boundaries
             int maximumX = (int)mapWidth / 2;
@@ -75,24 +79,72 @@ namespace finalSzczygielski
             throw new NotImplementedException("DistributeObjects() not implemented");
         }
 
-        public void UpdateMapPositions()
+        public void CreateBoundaries()
         {
-            foreach (IShip ship in ships)
+            // Top and bottom boundaries
+            for (int i = 0; i < mapWidth; i++)
             {
-                var (newX, newY) = ship.CalculateNextMove();
-                TryMoveObject(ship, newX, newY);
+                mapGrid[i, 0].SetBoundary();                       // Top
+                mapGrid[i, mapHeight - 1].SetBoundary();           // Bottom
+            }
+
+            // Left and right boundaries
+            for (int j = 0; j < mapHeight; j++)
+            {
+                mapGrid[0, j].SetBoundary();                       // Left
+                mapGrid[mapWidth - 1, j].SetBoundary();            // Right
             }
         }
 
-        public void TryMoveObject(MapEntity entity, int x, int y)
+        public void UpdateMapArray()
+        {
+            foreach(MapEntity entity in mapEntities)
+            {
+                foreach(var (x,y) in entity.ReturnOccupiedCoordinates())
+                {
+                    mapGrid[x, y].SetOwner(entity.id);
+                }
+            }
+        }
+
+        public void UpdateMapPositions()
+        {
+            //Updates moveable objects positions
+            foreach (IShip ship in ships)
+            {
+                var (newX, newY) = ship.CalculateNextMove();
+                TryMoveSingleObject(ship, newX, newY);
+            }
+        }
+
+        public void TryMoveSingleObject(MapEntity entity, int x, int y)
         {
             //A kind of setter that can place an object in a specific place
             //Used especially by Map class
             //Where to check map boundaries?
-            if (InMapBoundaries(x, y) == true)
+            if (IsInMapBoundaries(x, y) == true)
             {
                 entity.SetPosition(x, y);
             }
+        }
+
+        public void ResetMap()
+        {
+            foreach(MapCell var in mapGrid)
+            {
+                var.Reset();
+            }
+        }
+
+        public void CreateMap()
+        {
+            //Sequential logic of map handling in each round
+            ResetMap();
+            CreateBoundaries();
+            UpdateMapPositions();
+            UpdateMapArray();
+            //CheckCollisions();
+            
         }
     }
 }

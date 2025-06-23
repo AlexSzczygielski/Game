@@ -7,6 +7,12 @@ namespace finalSzczygielski
         {
             Console.WriteLine("EnemyShip implementation not ready");
         }
+
+        public override void SetPosition(int x, int y)
+        {
+            Console.Write("[ENEMY]");
+            base.SetPosition(x, y);
+        }
     }
 }
 

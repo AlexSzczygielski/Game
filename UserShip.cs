@@ -33,6 +33,12 @@ namespace finalSzczygielski
                 speed--;
             }
         }
+
+        public override void SetPosition(int x, int y)
+        {
+            Console.Write("[USER]");
+            base.SetPosition(x, y);
+        }
     }
 }
 

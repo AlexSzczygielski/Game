@@ -85,9 +85,14 @@ namespace finalSzczygielski
             int x1 = x0 + (int)Math.Round(dx);
             int y1 = y0 - (int)Math.Round(dy); // y decreases as you go "up" in most screen coords
 
-            Console.WriteLine($"Vector end: ({x1}, {y1})");
+            //Console.WriteLine($"Vector end: ({x1}, {y1})");
             return (x1, y1);
 
+        }
+
+        public override void SetPosition(int x, int y)
+        {
+            base.SetPosition(x, y);
         }
 
     }
