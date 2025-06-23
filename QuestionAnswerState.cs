@@ -5,7 +5,6 @@ namespace finalSzczygielski
     {
         public QuestionAnswerState()
         {
-            throw new NotImplementedException("QuestionAnswerState not implemented yet");
         }
     }
 }

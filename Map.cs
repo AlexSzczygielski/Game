@@ -86,10 +86,10 @@ namespace finalSzczygielski
 
             }
 
-            //mapEntities.First().SetPosition(400, 350);
-            mapEntities[1].SetPosition(600, 300);
+            mapEntities.First().SetPosition(600, 300);
+            mapEntities[1].SetPosition(600, 350);
             ((IShip)mapEntities[1]).speed = -2;
-            mapEntities[2].SetPosition(600, 200);
+            mapEntities[2].SetPosition(100, 200);
 
         }
 
@@ -287,7 +287,6 @@ namespace finalSzczygielski
                 (int posX, int posY) = kvp.Key;
                 if(cell.occupiedFlag == true)
                 {
-                    
                     if(cell.ownerId == 1) Console.Write($"ID: {cell.ownerId}, cell_pos ({posX},{posY}) \n");
                 }
             }

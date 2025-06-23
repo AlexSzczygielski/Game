@@ -7,16 +7,23 @@ namespace finalSzczygielski
     {
         private StringBuilder sb = new StringBuilder(); //Smooth GUI
         private ConsoleKey key;
+        private IState temp;
         public InGameState()
         {
         }
 
         public override void PerformAction()
         {
+            temp = new InGameState();
             InputManager.StartListening(); //Constant key listen for PerfomAction()
+            GatherInputData();
             base.PerformAction();
             Update();
-            InputManager.StopListening();  
+            InputManager.StopListening();
+            if((temp is InGameState) == false)
+            {
+                this.context.ChangeState(temp);
+            }
         }
 
         public void Update()
@@ -34,7 +41,7 @@ namespace finalSzczygielski
             }
 
             //Update position
-            this.context.gameCore._map.RefreshMap(this);
+            temp = this.context.gameCore._map.RefreshMap(this);
         }
 
         public bool CheckCollisions()
