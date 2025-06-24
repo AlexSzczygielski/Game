@@ -64,16 +64,19 @@ namespace finalSzczygielski
         public uint deletedAnsCounter { get; private set; }
         public uint lastQuestionId { get; protected set; } // FIX
         public GameCore gameCore { get; private set; } //initialized in CreateGameCore
-        //SqlManager sqlManager;
+        public SqlManager sqlManager = new SqlManager();
+        protected string questionsJsonFilePath;
         //WindowManager windowManager;
         //Printer printer;
         //InputManager inputManager;
         private IState _state = null;
 
-        public GameManager(IState state)
+        public GameManager(IState state, string questJsonFilePath)
         {
             //set init state
             this.ChangeState(state);
+
+            questionsJsonFilePath = questJsonFilePath;
 
             //reset values
             ResetCounters();
@@ -128,6 +131,8 @@ namespace finalSzczygielski
         {
             //Starts the game
             _running = true;
+            sqlManager.InitializeDatabase();
+            sqlManager.LoadQuestionsFromJson(questionsJsonFilePath);
             while (_running)
             {
                 Console.SetCursorPosition(0, 0);

@@ -22,7 +22,7 @@ namespace finalSzczygielski
             InputManager.StopListening();
             if((temp is InGameState) == false)
             {
-                this.context.ChangeState(temp);
+                this.context.ChangeState(temp); //Change to next state, if user collision detected
             }
         }
 
@@ -43,12 +43,7 @@ namespace finalSzczygielski
             //Update position
             temp = this.context.gameCore._map.RefreshMap(this);
         }
-
-        public bool CheckCollisions()
-        {
-            throw new NotImplementedException("CheckCollisions() not implemented");
-        }
-
+        
         public override void PrintText()
         {
             base.PrintText();
