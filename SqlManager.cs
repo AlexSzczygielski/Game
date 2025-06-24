@@ -103,6 +103,17 @@ namespace finalSzczygielski
 
             cmd.ExecuteNonQuery();
         }
+
+        public void SetAllQuestionsAvailable()
+        {
+            using var conn = new SqliteConnection(connectionString);
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "UPDATE Questions SET available = 1;";
+
+            cmd.ExecuteNonQuery();
+        }
     }
 }
 

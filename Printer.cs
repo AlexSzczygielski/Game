@@ -1,7 +1,7 @@
 ﻿using System;
-namespace homework6
+namespace finalSzczygielski
 {
-    static class Printer
+    public class Printer
     {
         //This is a static class that handles different options of printing
         //to the terminal

@@ -82,7 +82,7 @@ namespace finalSzczygielski
         protected string questionsJsonFilePath;
         protected string textsJsonFilePath;
         //WindowManager windowManager;
-        //Printer printer;
+        Printer printer;
         //InputManager inputManager;
         private IState _state = null;
 
@@ -178,6 +178,7 @@ namespace finalSzczygielski
 
             sqlManager.InitializeDatabase();
             sqlManager.LoadQuestionsFromJson(questionsJsonFilePath);
+            sqlManager.SetAllQuestionsAvailable();
             sqlText.InitializeDatabase();
             sqlText.LoadTextsFromJson(textsJsonFilePath);
             while (_running)
