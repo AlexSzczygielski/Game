@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Text;
+
 namespace finalSzczygielski
 {
     public class StartState:IState
     {
+        private StringBuilder sb = new StringBuilder(); //Smooth GUI
         protected uint levels;
         protected uint mapSize;
-
         public StartState()
         {
         }
@@ -19,25 +21,23 @@ namespace finalSzczygielski
         public override void PrintText()
         {
             base.PrintText();
-            Console.WriteLine("This will be eventually printed from file\n" +
-                "This is welcome page from StartState \n" +
-                "provide input for GameCore");
+            sb.Append(this.context.sqlText.GetText("introMessage"));
+            Console.WriteLine(sb);
         }
 
         public override void GatherInputData()
         {
-            Console.WriteLine("Now provide input data (CHANGE TO .TXT)" +
-                "this prompts user with data to start the game \n");
+            Console.WriteLine(this.context.sqlText.GetText("introInput1"));
 
             //Input logic
             while (true)
             {
                 try
                 {
-                    Console.WriteLine("Provide levels ");
+                    Console.WriteLine(this.context.sqlText.GetText("introInput2"));
                     levels = InputManager.Parse(Console.ReadLine());
                     this.context.levels = levels; //number of ships
-                    Console.WriteLine("Provide mapSize");
+                    Console.WriteLine(this.context.sqlText.GetText("introInput3"));
                     mapSize = InputManager.Parse(Console.ReadLine());
                     this.context.mapSize = mapSize;
                     break;

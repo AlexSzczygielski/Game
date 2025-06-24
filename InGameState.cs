@@ -47,18 +47,21 @@ namespace finalSzczygielski
         public override void PrintText()
         {
             base.PrintText();
-            sb.Append("This will be eventually printed from file\n" +
-                "This is InGameState \n" +
-                "provide steering input" +
-                $"Map Boundaries: ");
+            sb.Append(this.context.sqlText.GetText("InGame1"));
             foreach (var ship in this.context.gameCore._map.UserShips)
             {
-                sb.Append($"\nUser Course: {ship.direction}, Speed: {ship.speed}");
+                sb.Append(this.context.sqlText.GetText("InGame2"));
+                sb.Append($"{ship.direction}, ");
+                sb.Append(this.context.sqlText.GetText("InGame3"));
+                sb.Append($"{ship.speed}");
+                
             }
 
             foreach(var entity in this.context.gameCore._map.mapEntities)
             {
-                sb.Append($"\n[{entity}][ID: {entity.id}] position: ({entity.positionX},{entity.positionY})");
+                sb.Append($"\n[{entity}][ID: {entity.id}] ");
+                sb.Append(this.context.sqlText.GetText("InGame4"));
+                sb.Append($"({entity.positionX},{entity.positionY})");
             }
 
             Console.WriteLine(sb);

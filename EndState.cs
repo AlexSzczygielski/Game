@@ -11,7 +11,7 @@ namespace finalSzczygielski
         public override void PrintText()
         {
             base.PrintText();
-            Console.WriteLine("Quitting the program");
+            Console.WriteLine(this.context.sqlText.GetText("End1"));
             this.context.StopEngine();
         }
     }

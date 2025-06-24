@@ -78,18 +78,21 @@ namespace finalSzczygielski
 
         public GameCore gameCore { get; private set; } //initialized in CreateGameCore
         public SqlManager sqlManager = new SqlManager();
+        public SqlTextManager sqlText = new SqlTextManager();
         protected string questionsJsonFilePath;
+        protected string textsJsonFilePath;
         //WindowManager windowManager;
         //Printer printer;
         //InputManager inputManager;
         private IState _state = null;
 
-        public GameManager(IState state, string questJsonFilePath)
+        public GameManager(IState state, string questJsonFilePath, string textJsonFilePath)
         {
             //set init state
             this.ChangeState(state);
 
             questionsJsonFilePath = questJsonFilePath;
+            textsJsonFilePath = textJsonFilePath;
 
             //reset values
             ResetCounters();
@@ -146,6 +149,8 @@ namespace finalSzczygielski
             _running = true;
             sqlManager.InitializeDatabase();
             sqlManager.LoadQuestionsFromJson(questionsJsonFilePath);
+            sqlText.InitializeDatabase();
+            sqlText.LoadTextsFromJson(textsJsonFilePath);
             while (_running)
             {
                 Console.SetCursorPosition(0, 0);

@@ -1,0 +1,18 @@
+{
+  "introMessage": "This is welcome page from StartState \n provide input for GameCore",
+  "introInput1": "Now provide input data: ",
+  "introInput2": "Provide number of levels: ",
+  "introInput3": "Provide mapSize",
+  "InGame1": "This is InGameState \n provide steering input",
+  "InGame2": "\nUser Course: ",
+  "InGame3": "Speed: ",
+  "InGame4": "position: ",
+  "QA1": "This is Question/Answer State\n Answer the question: \n",
+  "QA2": "\nYour answer: ",
+  "QA3": "Correct answer! \n getting back to the sea!",
+  "QA4": "Wrong answer! \n Try again? y/n \n If you want to delete this question, press 'd'",
+  "End1": "Quitting the program",
+  "InManager1": "",
+  "hintPrompt": "Would you like a hint?",
+  "errorNoAnswer": "You must enter an answer before continuing."
+}

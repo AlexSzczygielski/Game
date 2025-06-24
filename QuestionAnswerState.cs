@@ -39,11 +39,9 @@ namespace finalSzczygielski
         public override void PrintText()
         {
             base.PrintText();
-            sb.Append("This is Question/Answer State\n" +
-                "This will be finally input from a file \n" +
-                "Answer questions: \n");
+            sb.Append(this.context.sqlText.GetText("QA1"));
             sb.Append(question);
-            sb.Append("\nYour answer: ");
+            sb.Append(this.context.sqlText.GetText("QA2"));
             Console.WriteLine(sb);
         }
 
@@ -64,8 +62,7 @@ namespace finalSzczygielski
         public IState HandleCorrectAnswer(IState state)
         {
             sb.Clear();
-            sb.Append("Correct answer! \n" +
-                "getting back to the sea!");
+            sb.Append(this.context.sqlText.GetText("QA3"));
             Console.WriteLine(sb);
             InputManager.WaitForInput();
             SetQuestionAvailability(false);
@@ -78,9 +75,7 @@ namespace finalSzczygielski
         {
             this.context.wrongAnsCounter++;
             sb.Clear();
-            sb.Append("Wrong answer! \n" +
-                "Try again? y/n \n" +
-                "If you want to delete this question, press 'd'");
+            sb.Append(this.context.sqlText.GetText("QA4"));
             Console.WriteLine(sb);
             string ans = Console.ReadLine();
             if (ans == "n")
