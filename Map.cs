@@ -266,7 +266,13 @@ namespace finalSzczygielski
 
         protected IState HandleUserCollision(MapEntity e1, MapEntity e2, IState state)
         {
-            if((e1 is UserShip && (e2 is EnemyShip)) || (e2 is UserShip && (e1 is EnemyShip)))
+            foreach (UserShip ship in UserShips)
+            {
+                //This ensures that User's ship will not immediately reenter desired state after leaving it (returning back to the game)
+                ForceRandomMove(ship);
+            }
+
+            if ((e1 is UserShip && (e2 is EnemyShip)) || (e2 is UserShip && (e1 is EnemyShip)))
             {
                 state = new QuestionAnswerState();
             }
