@@ -15,6 +15,7 @@ namespace finalSzczygielski
 
         public override void PerformAction()
         {
+            userAnswer = "";
             temp = this;
             question = this.context.sqlManager.GetRandomQuestion();
             base.PerformAction();
@@ -62,7 +63,14 @@ namespace finalSzczygielski
 
         public IState HandleCorrectAnswer(IState state)
         {
-            return state;
+            sb.Clear();
+            sb.Append("Correct answer! \n" +
+                "getting back to the sea!");
+            Console.WriteLine(sb);
+            InputManager.WaitForInput();
+            this.context.gameCore._map.DeleteEnemy();
+            this.context.roundCounter--;
+            return new InGameState();
         }
 
         public IState HandleWrongAnswer(IState state)

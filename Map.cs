@@ -22,6 +22,8 @@ namespace finalSzczygielski
 
         protected Dictionary<(int, int), MapCell> mapGrid; //mapGrid array
 
+        public int lastAccessedEnemyShipId { get; protected set; } = -1;
+
         public Map(List<IShip> shipsIn, List<Port> portsIn, uint width, uint height)
         {
             mapEntities = new List<MapEntity>();
@@ -86,10 +88,15 @@ namespace finalSzczygielski
 
             }
 
+            //mapEntities.First().SetPosition(600, 300);
+            //mapEntities[1].SetPosition(600, 350);
+            //((IShip)mapEntities[1]).speed = -2;
+            //mapEntities[2].SetPosition(100, 200);
             mapEntities.First().SetPosition(600, 300);
-            mapEntities[1].SetPosition(600, 350);
-            ((IShip)mapEntities[1]).speed = -2;
-            mapEntities[2].SetPosition(100, 200);
+            ((IShip)mapEntities[0]).speed = -2;
+            mapEntities[1].SetPosition(600, 200);
+            mapEntities[2].SetPosition(600, 100);
+            mapEntities[3].SetPosition(600, 0);
 
         }
 
@@ -275,6 +282,11 @@ namespace finalSzczygielski
             if ((e1 is UserShip && (e2 is EnemyShip)) || (e2 is UserShip && (e1 is EnemyShip)))
             {
                 state = new QuestionAnswerState();
+                // Capture enemy ID
+                if (e1 is EnemyShip)
+                    lastAccessedEnemyShipId = e1.id;
+                else if (e2 is EnemyShip)
+                    lastAccessedEnemyShipId = e2.id;
             }
 
             if ((e1 is UserShip && (e2 is Port)) || (e2 is UserShip && (e1 is Port)))
@@ -283,6 +295,22 @@ namespace finalSzczygielski
             }
 
             return state;
+        }
+
+        public void DeleteEnemy()
+        {
+            //responsible for deleting EnemyShip, either after CorrectAns or
+            //when reducing levels
+            // Find the enemy ship with the matching ID
+            EnemyShip shipToRemove = EnemyShips.FirstOrDefault(ship => ship.id == lastAccessedEnemyShipId);
+            
+            if (shipToRemove != null)
+            {
+                // Remove from mapEntities
+                mapEntities.Remove(shipToRemove);
+                // Reset the last accessed ID
+                lastAccessedEnemyShipId = -1;
+            }
         }
 
         public void PrintMap()

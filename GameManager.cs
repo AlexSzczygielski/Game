@@ -31,13 +31,13 @@ namespace finalSzczygielski
             get { return _roundCounter; }
             set
             {
-                if (_state is (InGameState or StartState))
+                if (_state is (QuestionAnswerState or StartState))
                 {
                     _roundCounter = value;
                 }
                 else
                 {
-                    throw new InvalidOperationException("roundCounter can only be modified in StartState or InGameState.");
+                    throw new InvalidOperationException("roundCounter can only be modified in QuestionAnswer or InGameState.");
                 }
             }
         }
@@ -138,6 +138,12 @@ namespace finalSzczygielski
                 Console.SetCursorPosition(0, 0);
                 this._state.PerformAction();
                 System.Threading.Thread.Sleep(100); // sleeps for 100 milliseconds
+
+                //If all levels are completed
+                if(roundCounter == 0)
+                {
+                    ChangeState(new EndState());
+                }
             }
         }
 
