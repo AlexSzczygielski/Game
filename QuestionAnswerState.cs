@@ -68,6 +68,7 @@ namespace finalSzczygielski
                 "getting back to the sea!");
             Console.WriteLine(sb);
             InputManager.WaitForInput();
+            SetQuestionAvailability(false);
             this.context.gameCore._map.DeleteEnemy();
             this.context.roundCounter--;
             return new InGameState();
@@ -75,19 +76,33 @@ namespace finalSzczygielski
 
         public IState HandleWrongAnswer(IState state)
         {
+            this.context.wrongAnsCounter++;
             sb.Clear();
             sb.Append("Wrong answer! \n" +
-                "Try again? y/n");
+                "Try again? y/n \n" +
+                "If you want to delete this question, press 'd'");
             Console.WriteLine(sb);
-            if (Console.ReadLine() == "n")
+            string ans = Console.ReadLine();
+            if (ans == "n")
             {
                 return new InGameState();
             }
             else
             {
+                if(ans == "d")
+                {
+                    this.context.deletedAnsCounter++;
+                    SetQuestionAvailability(false);
+                }
                 return state;
             }
 
+        }
+
+        protected void SetQuestionAvailability(bool isAvailable)
+        {
+            //sets availability of given question through sqlManager
+            this.context.sqlManager.SetAvailabilityFlag(question, isAvailable);
         }
     }
 }

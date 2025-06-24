@@ -61,8 +61,21 @@ namespace finalSzczygielski
         }
 
         private bool _running;
-        public uint deletedAnsCounter { get; private set; }
-        public uint lastQuestionId { get; protected set; } // FIX
+
+        private uint _deletedAnsCounter;
+        public uint deletedAnsCounter
+        {
+            get { return _deletedAnsCounter; }
+            set { value = _deletedAnsCounter; }
+        }
+
+        private uint _wrongAnsCounter;
+        public uint wrongAnsCounter
+        {
+            get { return _wrongAnsCounter; }
+            set { value = _wrongAnsCounter; }
+        }
+
         public GameCore gameCore { get; private set; } //initialized in CreateGameCore
         public SqlManager sqlManager = new SqlManager();
         protected string questionsJsonFilePath;
@@ -99,7 +112,7 @@ namespace finalSzczygielski
             levels = 1; //levels have to be non 0
             _running = false; //Game not started yet
             deletedAnsCounter = 0;
-            lastQuestionId = 0;
+            wrongAnsCounter = 0;
         }
 
         public void CreateGameCore(uint numberOfShips, uint mapSize)

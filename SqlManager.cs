@@ -85,6 +85,24 @@ namespace finalSzczygielski
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public void SetAvailabilityFlag(Question q, bool isAvailable)
+        {
+            using var conn = new SqliteConnection(connectionString);
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = @"
+            UPDATE Questions
+            SET available = $available
+            WHERE id = $id;
+            ";
+
+            cmd.Parameters.AddWithValue("$available", isAvailable ? 1 : 0); // SQLite uses 0/1 for booleans
+            cmd.Parameters.AddWithValue("$id", q.id);
+
+            cmd.ExecuteNonQuery();
+        }
     }
 }
 
