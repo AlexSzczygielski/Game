@@ -1,0 +1,18 @@
+{
+  "introMessage": "这是来自 StartState 的欢迎页面\n请为 GameCore 提供输入",
+  "introInput1": "现在请提供输入数据：",
+  "introInput2": "请输入关卡数量：",
+  "introInput3": "请输入地图大小",
+  "InGame1": "这是 InGameState\n请输入控制指令",
+  "InGame2": "\n用户航向：",
+  "InGame3": "速度：",
+  "InGame4": "位置：",
+  "QA1": "这是问答状态\n请回答问题：\n",
+  "QA2": "\n你的答案：",
+  "QA3": "回答正确！\n返回海上！",
+  "QA4": "回答错误！\n再试一次？y/n\n如果你想删除这个问题，请按 'd'",
+  "End1": "正在退出程序",
+  "InManager1": "",
+  "hintPrompt": "你想要提示吗？",
+  "errorNoAnswer": "在继续之前你必须输入一个答案。"
+}

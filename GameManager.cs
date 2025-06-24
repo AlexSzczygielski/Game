@@ -118,6 +118,32 @@ namespace finalSzczygielski
             wrongAnsCounter = 0;
         }
 
+        public void GetLanguage()
+        {
+            Console.WriteLine("Choose language: \n" +
+                "1. English \n" +
+                "2. Polish \n" +
+                "3. Spanish \n" +
+                "4. Chineese");
+            string ans = Console.ReadLine();
+            if(ans == "2")
+            {
+                questionsJsonFilePath = "POLquestJsonFilePath";
+                textsJsonFilePath = "POLtextJsonFilePath";
+                
+            }
+            if (ans == "3")
+            {
+                textsJsonFilePath = "ESPtextJsonFilePath";
+                questionsJsonFilePath = "ESPquestJsonFilePath";
+            }
+            if (ans == "4")
+            {
+                textsJsonFilePath = "CHItextJsonFilePath";
+                questionsJsonFilePath = "CHIquestJsonFilePath";
+            }
+        }
+
         public void CreateGameCore(uint numberOfShips, uint mapSize)
         {
             //This method creates GameCore, works with StartState implementation
@@ -147,6 +173,9 @@ namespace finalSzczygielski
         {
             //Starts the game
             _running = true;
+            //Ask for language
+            GetLanguage();
+
             sqlManager.InitializeDatabase();
             sqlManager.LoadQuestionsFromJson(questionsJsonFilePath);
             sqlText.InitializeDatabase();

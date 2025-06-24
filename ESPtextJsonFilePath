@@ -1,0 +1,18 @@
+{
+  "introMessage": "Esta es la página de bienvenida desde StartState \n proporciona datos de entrada para GameCore",
+  "introInput1": "Ahora proporciona los datos de entrada: ",
+  "introInput2": "Proporciona el número de niveles: ",
+  "introInput3": "Proporciona el tamaño del mapa",
+  "InGame1": "Este es InGameState \n proporciona entrada de dirección",
+  "InGame2": "\nCurso del usuario: ",
+  "InGame3": "Velocidad: ",
+  "InGame4": "Posición: ",
+  "QA1": "Este es el estado de Pregunta/Respuesta\n Responde la pregunta: \n",
+  "QA2": "\nTu respuesta: ",
+  "QA3": "¡Respuesta correcta! \n ¡Volviendo al mar!",
+  "QA4": "¡Respuesta incorrecta! \n ¿Intentar de nuevo? s/n \n Si quieres eliminar esta pregunta, presiona 'd'",
+  "End1": "Saliendo del programa",
+  "InManager1": "",
+  "hintPrompt": "¿Quieres una pista?",
+  "errorNoAnswer": "Debes ingresar una respuesta antes de continuar."
+}

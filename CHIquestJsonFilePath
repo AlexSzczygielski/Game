@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1, "text": "法国的首都是哪里？", "correctAnswer": "巴黎", "topic": "地理", "difficulty": 1, "available": true
+  },
+  {
+    "id": 2, "text": "2 加 2 等于多少？", "correctAnswer": "4", "topic": "数学", "difficulty": 1, "available": true
+  },
+  {
+    "id": 3, "text": "谁写了《罗密欧与朱丽叶》？", "correctAnswer": "威廉·莎士比亚", "topic": "文学", "difficulty": 2, "available": true
+  },
+  {
+    "id": 4, "text": "水的沸点是多少摄氏度？", "correctAnswer": "100", "topic": "科学", "difficulty": 1, "available": true
+  },
+  {
+    "id": 5, "text": "哪一颗行星被称为红色星球？", "correctAnswer": "火星", "topic": "天文学", "difficulty": 1, "available": true
+  },
+  {
+    "id": 6, "text": "第二次世界大战结束于哪一年？", "correctAnswer": "1945", "topic": "历史", "difficulty": 2, "available": true
+  },
+  {
+    "id": 7, "text": "64 的平方根是多少？", "correctAnswer": "8", "topic": "数学", "difficulty": 2, "available": true
+  },
+  {
+    "id": 8, "text": "植物从大气中吸收哪种气体？", "correctAnswer": "二氧化碳", "topic": "生物学", "difficulty": 2, "available": true
+  },
+  {
+    "id": 9, "text": "谁画了《蒙娜丽莎》？", "correctAnswer": "列奥纳多·达·芬奇", "topic": "艺术", "difficulty": 2, "available": true
+  },
+  {
+    "id": 10, "text": "地球上最大的海洋是哪一个？", "correctAnswer": "太平洋", "topic": "地理", "difficulty": 2, "available": true
+  }
+]

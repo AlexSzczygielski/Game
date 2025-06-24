@@ -13,13 +13,14 @@ namespace finalSzczygielski
             using var conn = new SqliteConnection(connectionString);
             conn.Open();
 
-            var cmd = conn.CreateCommand();
-            cmd.CommandText = @"
+            string createTableQuery = @"
             CREATE TABLE IF NOT EXISTS TextResources (
                 key TEXT PRIMARY KEY,
                 content TEXT NOT NULL
             );
         ";
+            //This will execute only if the table does not yet exist
+            using var cmd = new SqliteCommand(createTableQuery, conn);
             cmd.ExecuteNonQuery();
         }
 

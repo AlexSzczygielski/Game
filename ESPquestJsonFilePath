@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1, "text": "¿Cuál es la capital de Francia?", "correctAnswer": "París", "topic": "Geografía", "difficulty": 1, "available": true
+  },
+  {
+    "id": 2, "text": "¿Cuánto es 2 + 2?", "correctAnswer": "4", "topic": "Matemáticas", "difficulty": 1, "available": true
+  },
+  {
+    "id": 3, "text": "¿Quién escribió 'Romeo y Julieta'?", "correctAnswer": "William Shakespeare", "topic": "Literatura", "difficulty": 2, "available": true
+  },
+  {
+    "id": 4, "text": "¿Cuál es el punto de ebullición del agua en grados Celsius?", "correctAnswer": "100", "topic": "Ciencia", "difficulty": 1, "available": true
+  },
+  {
+    "id": 5, "text": "¿Qué planeta es conocido como el Planeta Rojo?", "correctAnswer": "Marte", "topic": "Astronomía", "difficulty": 1, "available": true
+  },
+  {
+    "id": 6, "text": "¿En qué año terminó la Segunda Guerra Mundial?", "correctAnswer": "1945", "topic": "Historia", "difficulty": 2, "available": true
+  },
+  {
+    "id": 7, "text": "¿Cuál es la raíz cuadrada de 64?", "correctAnswer": "8", "topic": "Matemáticas", "difficulty": 2, "available": true
+  },
+  {
+    "id": 8, "text": "¿Qué gas absorben las plantas de la atmósfera?", "correctAnswer": "Dióxido de carbono", "topic": "Biología", "difficulty": 2, "available": true
+  },
+  {
+    "id": 9, "text": "¿Quién pintó la Mona Lisa?", "correctAnswer": "Leonardo da Vinci", "topic": "Arte", "difficulty": 2, "available": true
+  },
+  {
+    "id": 10, "text": "¿Cuál es el océano más grande de la Tierra?", "correctAnswer": "Océano Pacífico", "topic": "Geografía", "difficulty": 2, "available": true
+  }
+]
